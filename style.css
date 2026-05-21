@@ -1,0 +1,50 @@
+/*
+Theme Name: Positive Pflege Pro
+Theme URI: https://positivepflege.de
+Author: David Sann
+Author URI: https://david-sann.de
+Description: Modernes, wartbares WordPress-Theme für Positive Pflege mit Customizer-Optionen für Hero, Leistungen, Vertrauen, Kontakt und Design.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.8
+Requires PHP: 7.4
+Text Domain: positivepflege-pro
+*/
+/* Fade-in beim Scrollen - Nur aktivieren, wenn der Browser Scroll-Driven Animations unterstützt */
+@supports (animation-timeline: view()) {
+    .pp-reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        animation: pp-reveal-in linear both;
+        animation-timeline: view();
+        animation-range: 10% 40%;
+        /* Verhindert Flackern in Chrome */
+        backface-visibility: hidden;
+    }
+}
+
+@keyframes pp-reveal-in {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Barrierefreiheit: Animationen deaktivieren, wenn Nutzer dies bevorzugen */
+@media (prefers-reduced-motion: reduce) {
+    .pp-reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+}
+
+/* Hilfsklassen für verzögertes Einblenden (Staggering) */
+.pp-delay-1 { animation-delay: 0.1s; }
+.pp-delay-2 { animation-delay: 0.2s; }
+.pp-delay-3 { animation-delay: 0.3s; }
+
