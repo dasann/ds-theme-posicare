@@ -3,26 +3,24 @@
     {
         "@context": "https://schema.org",
         "@type": ["LocalBusiness", "MedicalBusiness"],
-        "name": "Positive Pflege Tunjašević GmbH",
+        "name": "<?php echo esc_js(get_bloginfo('name')); ?>",
         "alternateName": "Positive Pflege",
-        "description": "Inhabergeführter ambulanter Pflegedienst in Hamburg-Altona. Leistungen: Grundpflege, Behandlungspflege, Hauswirtschaft, Verhinderungspflege und Pflegeberatung nach § 37 Abs. 3 SGB XI. Mehrsprachiges Team.",
-        "url": "https://positivepflege.david-sann.de",
-        "telephone": "+494030068300",
-        "email": "info@positivepflege.de",
-        "logo": "https://positivepflege.david-sann.de/wp-content/uploads/2026/05/icon-loading.54059b80.svg",
-        "image": "https://positivepflege.david-sann.de/wp-content/uploads/2026/04/large_Leistungen_Positive_Pflege_2eea6bc7f4.png",
+        "description": "<?php echo esc_js(get_theme_mod('hero_text', 'Inhabergeführter ambulanter Pflegedienst in Hamburg-Altona. Leistungen: Grundpflege, Behandlungspflege, Hauswirtschaft, Verhinderungspflege und Pflegeberatung nach § 37 Abs. 3 SGB XI. Mehrsprachiges Team.')); ?>",
+        "url": "<?php echo esc_js(home_url('/')); ?>",
+        "telephone": "<?php echo esc_js(preg_replace('/[^0-9+]/', '', get_theme_mod('contact_phone', '+494030068300'))); ?>",
+        "email": "<?php echo esc_js(get_theme_mod('contact_email', 'info@positivepflege.de')); ?>",
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Ehrenbergstr. 39",
-            "addressLocality": "Hamburg",
-            "addressRegion": "HH",
-            "postalCode": "22767",
-            "addressCountry": "DE"
+            "streetAddress": "<?php echo esc_js(get_theme_mod('company_street', 'Ehrenbergstr. 39')); ?>",
+            "addressLocality": "<?php echo esc_js(get_theme_mod('company_city', 'Hamburg')); ?>",
+            "addressRegion": "<?php echo esc_js(get_theme_mod('company_region', 'HH')); ?>",
+            "postalCode": "<?php echo esc_js(get_theme_mod('company_postcode', '22767')); ?>",
+            "addressCountry": "<?php echo esc_js(get_theme_mod('company_country', 'DE')); ?>"
         },
         "geo": {
             "@type": "GeoCoordinates",
-            "latitude": "53.549937532559284",
-            "longitude": "9.93931787116394"
+            "latitude": "<?php echo esc_js(get_theme_mod('company_lat', '53.549937532559284')); ?>",
+            "longitude": "<?php echo esc_js(get_theme_mod('company_lng', '9.93931787116394')); ?>"
         },
         "openingHoursSpecification": [
             {
@@ -38,19 +36,19 @@
                 "closes": "16:00"
             }
         ],
-        "hasMap": "https://maps.google.com/?q=Positive+Pflege+Hamburg-Altona",
         "areaServed": {
             "@type": "City",
-            "name": "Hamburg"
+            "name": "<?php echo esc_js(get_theme_mod('company_city', 'Hamburg')); ?>"
         },
         "serviceArea": {
             "@type": "AdministrativeArea",
-            "name": "Hamburg-Altona"
+            "name": "<?php echo esc_js(get_theme_mod('company_area', 'Hamburg-Altona')); ?>"
         },
-        "knowsLanguage": ["de", "tr", "ru", "sr", "hr", "bs"],
-        "priceRange": "Kostenübernahme durch Pflegekasse möglich",
-        "sameAs": [
-            "https://www.google.de/search?kgmid=/g/11m_97gk_c&hl=de-DE&q=Positive+Pflege+Tunja%C5%A1evi%C4%87+GmbH&shem=rimspwouoh&shndl=30&source=sh/x/loc/osrp/m5/1&kgs=a213f4e0f34bc49c&utm_source=rimspwouoh,sh/x/loc/osrp/m5/1"
-        ]
+        "knowsLanguage": <?php 
+            $langs_str = get_theme_mod('company_languages', 'de, tr, ru, sr, hr, bs');
+            $langs_array = array_map('trim', explode(',', $langs_str));
+            echo json_encode($langs_array); 
+        ?>,
+        "priceRange": "Kostenübernahme durch Pflegekasse möglich"
     }
 </script>
