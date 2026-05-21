@@ -14,8 +14,8 @@
                 <div class="site-logo"><?php the_custom_logo(); ?></div>
             <?php endif; ?>
             <div>
-                <a class="site-title" href="<?php echo esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a>
-                <p class="site-tagline"><?php bloginfo('description'); ?></p>
+                <a class="site-title" href="<?php echo esc_url(home_url('/')); ?>"><?php echo esc_html(get_bloginfo('name')); ?></a>
+                <p class="site-tagline"><?php echo esc_html(get_bloginfo('description')); ?></p>
             </div>
         </div>
 
@@ -47,12 +47,12 @@
             if ($phone || $opening_hours) : ?>
                 <div class="header-contact-info">
                     <?php if ($phone) : ?>
-                        <div class="header-phone">
-                            <a href="tel:<?php echo esc_attr(preg_replace('/[^0-9+]/', '', $phone)); ?>">
-                                <span class="dashicons dashicons-phone"></span>
-                                <?php echo esc_html($phone); ?>
-                            </a>
-                        </div>
+            <div class="header-phone">
+                        <a href="tel:<?php echo esc_attr(preg_replace('/[^0-9+]/', '', $phone)); ?>">
+                            <span class="dashicons dashicons-phone"></span>
+                            <?php echo esc_html($phone); ?>
+                        </a>
+                    </div>
                     <?php endif; ?>
                     
                     <?php if ($opening_hours) : ?>

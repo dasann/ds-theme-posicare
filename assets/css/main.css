@@ -82,6 +82,8 @@ a { color: inherit; text-decoration: none; }
 }
 
 .header-cta-button {
+    background-color: var(--pp-header-cta-bg);
+    color: var(--pp-header-cta-text);
     border-style: solid;
     text-decoration: none !important;
 }
