@@ -9,7 +9,7 @@
         "url": "https://positivepflege.de",
         "telephone": "+494030068300",
         "email": "info@positivepflege.de",
-        "logo": "https://positivepflege./wp-content/uploads/2026/05/icon-loading.54059b80.svg",
+        "logo": "https://positivepflege.de/wp-content/uploads/2026/05/icon-loading.54059b80.svg",
         "image": "https://positivepflege.de/wp-content/uploads/2026/04/large_Leistungen_Positive_Pflege_2eea6bc7f4.png",
         "address": {
             "@type": "PostalAddress",

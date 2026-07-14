@@ -360,7 +360,7 @@ function positivepflege_pro_customize_register($wp_customize) {
         'contact_cta_text' => ['default' => 'Sie haben Fragen zur Versorgung, zum Ablauf oder zu möglichen Leistungen? Wir helfen gerne weiter.', 'label' => 'Text', 'type' => 'textarea', 'sanitize' => 'positivepflege_pro_sanitize_textarea'],
         'contact_cta_phone' => ['default' => '0451 / 000000', 'label' => 'Text Anruf CTA', 'type' => 'text', 'sanitize' => 'positivepflege_pro_sanitize_text'],
         'contact_phone' => ['default' => '0451 / 000000', 'label' => 'Telefonnummer', 'type' => 'text', 'sanitize' => 'positivepflege_pro_sanitize_text'],
-        'contact_email' => ['default' => 'info@positivepflege,de', 'label' => 'Email', 'type' => 'text', 'sanitize' => 'positivepflege_pro_sanitize_text'],
+        'contact_email' => ['default' => 'info@positivepflege.de', 'label' => 'Email', 'type' => 'text', 'sanitize' => 'positivepflege_pro_sanitize_text'],
 
         'contact_button_text' => ['default' => 'Kontaktseite öffnen', 'label' => 'Button Text', 'type' => 'text', 'sanitize' => 'positivepflege_pro_sanitize_text'],
         'contact_button_url' => ['default' => '/kontakt', 'label' => 'Button Link', 'type' => 'url', 'sanitize' => 'positivepflege_pro_sanitize_url'],
