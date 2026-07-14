@@ -25,19 +25,10 @@ function positivepflege_pro_setup() {
 add_action('after_setup_theme', 'positivepflege_pro_setup');
 
 function positivepflege_pro_assets() {
-    $theme_version = wp_get_theme()->get('Version');
-    $main_css_path = get_template_directory() . '/assets/css/main.css';
-    $main_js_path  = get_template_directory() . '/assets/js/main.js';
-    $style_css_path = get_template_directory() . '/style.css';
-
-    $style_version = file_exists($style_css_path) ? filemtime($style_css_path) : $theme_version;
-    $css_version   = file_exists($main_css_path) ? filemtime($main_css_path) : $theme_version;
-    $js_version    = file_exists($main_js_path) ? filemtime($main_js_path) : $theme_version;
-
     wp_enqueue_style('dashicons');
-    wp_enqueue_style('positivepflege-pro-style', get_stylesheet_uri(), [], $style_version);
-    wp_enqueue_style('positivepflege-pro-main', get_template_directory_uri() . '/assets/css/main.css', ['positivepflege-pro-style'], $css_version);
-    wp_enqueue_script('positivepflege-pro-main', get_template_directory_uri() . '/assets/js/main.js', [], $js_version, true);
+    wp_enqueue_style('positivepflege-pro-style', get_stylesheet_uri(), [], '1.0.0');
+    wp_enqueue_style('positivepflege-pro-main', get_template_directory_uri() . '/assets/css/main.css', ['positivepflege-pro-style'], '1.0.0');
+    wp_enqueue_script('positivepflege-pro-main', get_template_directory_uri() . '/assets/js/main.js', [], '1.0.0', true);
 }
 add_action('wp_enqueue_scripts', 'positivepflege_pro_assets');
 
@@ -312,6 +303,17 @@ function positivepflege_pro_customize_register($wp_customize) {
         ]);
     }
 
+    // Neues Setting für das Bild in der Trust-Section
+    $wp_customize->add_setting('trust_image', [
+        'sanitize_callback' => 'absint',
+    ]);
+    $wp_customize->add_control(new WP_Customize_Media_Control($wp_customize, 'trust_image', [
+        'label'     => __('Bild Vertrauen-Bereich', 'positivepflege-pro'),
+        'section'   => 'positivepflege_trust',
+        'mime_type' => 'image',
+        'description' => __('Dieses Bild ersetzt die Liste auf der rechten Seite.', 'positivepflege-pro'),
+    ]));
+
     // Team
     $wp_customize->add_section('positivepflege_team', [
         'title'    => __('Über uns', 'positivepflege-pro'),
@@ -322,9 +324,6 @@ function positivepflege_pro_customize_register($wp_customize) {
     $team_fields = [
         'team_title' => ['default' => 'Vertrauen entsteht durch Nähe und Verlässlichkeit', 'label' => 'Titel', 'type' => 'text', 'sanitize' => 'positivepflege_pro_sanitize_text'],
         'team_text' => ['default' => 'Als inhabergeführtes Unternehmen stehen wir für persönliche Betreuung, feste Ansprechpartner und einen respektvollen Umgang.', 'label' => 'Text', 'type' => 'textarea', 'sanitize' => 'positivepflege_pro_sanitize_textarea'],
-        'team_point_1' => ['default' => 'Inhabergeführtes Familienunternehmen', 'label' => 'Vorteil 1', 'type' => 'text', 'sanitize' => 'positivepflege_pro_sanitize_text'],
-        'team_point_2' => ['default' => 'Persönliche Ansprechpartner', 'label' => 'Vorteil 2', 'type' => 'text', 'sanitize' => 'positivepflege_pro_sanitize_text'],
-        'team_point_3' => ['default' => 'Kompetente ambulante Versorgung', 'label' => 'Vorteil 3', 'type' => 'text', 'sanitize' => 'positivepflege_pro_sanitize_text'],
     ];
 
     foreach ($team_fields as $setting => $field) {
@@ -339,6 +338,16 @@ function positivepflege_pro_customize_register($wp_customize) {
         ]);
     }
 
+    $wp_customize->add_setting('team_image', [
+        'sanitize_callback' => 'absint',
+    ]);
+    $wp_customize->add_control(new WP_Customize_Media_Control($wp_customize, 'team_image', [
+        'label'     => __('Bild Über-uns-Bereich', 'positivepflege-pro'),
+        'section'   => 'positivepflege_team',
+        'mime_type' => 'image',
+        'description' => __('Dieses Bild erscheint auf der linken Seite.', 'positivepflege-pro'),
+    ]));
+
     // Kontakt CTA
     $wp_customize->add_section('positivepflege_contact_cta', [
         'title'    => __('Kontakt-CTA', 'positivepflege-pro'),
@@ -351,7 +360,7 @@ function positivepflege_pro_customize_register($wp_customize) {
         'contact_cta_text' => ['default' => 'Sie haben Fragen zur Versorgung, zum Ablauf oder zu möglichen Leistungen? Wir helfen gerne weiter.', 'label' => 'Text', 'type' => 'textarea', 'sanitize' => 'positivepflege_pro_sanitize_textarea'],
         'contact_cta_phone' => ['default' => '0451 / 000000', 'label' => 'Text Anruf CTA', 'type' => 'text', 'sanitize' => 'positivepflege_pro_sanitize_text'],
         'contact_phone' => ['default' => '0451 / 000000', 'label' => 'Telefonnummer', 'type' => 'text', 'sanitize' => 'positivepflege_pro_sanitize_text'],
-        'contact_email' => ['default' => 'info@positivepflege.de', 'label' => 'Email', 'type' => 'text', 'sanitize' => 'positivepflege_pro_sanitize_text'],
+        'contact_email' => ['default' => 'info@positivepflege,de', 'label' => 'Email', 'type' => 'text', 'sanitize' => 'positivepflege_pro_sanitize_text'],
 
         'contact_button_text' => ['default' => 'Kontaktseite öffnen', 'label' => 'Button Text', 'type' => 'text', 'sanitize' => 'positivepflege_pro_sanitize_text'],
         'contact_button_url' => ['default' => '/kontakt', 'label' => 'Button Link', 'type' => 'url', 'sanitize' => 'positivepflege_pro_sanitize_url'],
@@ -359,7 +368,7 @@ function positivepflege_pro_customize_register($wp_customize) {
 
     foreach ($contact_fields as $setting => $field) {
         $wp_customize->add_setting($setting, [
-            'default'           => $field['default'],
+            'default'           => isset($field['default']) ? $field['default'] : '',
             'sanitize_callback' => $field['sanitize'],
         ]);
         $wp_customize->add_control($setting, [
@@ -369,36 +378,15 @@ function positivepflege_pro_customize_register($wp_customize) {
         ]);
     }
 
-    // Firmendaten für Schema.org
-    $wp_customize->add_section('positivepflege_company_data', [
-        'title'    => __('Firmendaten (Schema.org)', 'positivepflege-pro'),
-        'priority' => 35,
+    $wp_customize->add_setting('contact_cta_image', [
+        'sanitize_callback' => 'absint',
     ]);
-
-    $company_fields = [
-        'company_street'    => ['default' => 'Ehrenbergstr. 39', 'label' => 'Straße & Hausnummer', 'type' => 'text'],
-        'company_city'      => ['default' => 'Hamburg', 'label' => 'Stadt', 'type' => 'text'],
-        'company_postcode'  => ['default' => '22767', 'label' => 'Postleitzahl', 'type' => 'text'],
-        'company_region'    => ['default' => 'HH', 'label' => 'Region (z.B. HH)', 'type' => 'text'],
-        'company_country'   => ['default' => 'DE', 'label' => 'Land (z.B. DE)', 'type' => 'text'],
-        'company_lat'       => ['default' => '53.549937532559284', 'label' => 'Breitengrad (Latitude)', 'type' => 'text'],
-        'company_lng'       => ['default' => '9.93931787116394', 'label' => 'Längengrad (Longitude)', 'type' => 'text'],
-        'company_area'      => ['default' => 'Hamburg-Altona', 'label' => 'Einzugsgebiet / Service-Bereich', 'type' => 'text'],
-        'company_languages' => ['default' => 'de, tr, ru, sr, hr, bs', 'label' => 'Sprachen (kommagetrennt)', 'type' => 'text'],
-    ];
-
-    foreach ($company_fields as $setting => $field) {
-        $wp_customize->add_setting($setting, [
-            'default'           => $field['default'],
-            'sanitize_callback' => 'positivepflege_pro_sanitize_text',
-            'transport'         => 'refresh',
-        ]);
-        $wp_customize->add_control($setting, [
-            'label'   => __($field['label'], 'positivepflege-pro'),
-            'section' => 'positivepflege_company_data',
-            'type'    => $field['type'],
-        ]);
-    }
+    $wp_customize->add_control(new WP_Customize_Media_Control($wp_customize, 'contact_cta_image', [
+        'label'     => __('Bild Kontakt-CTA', 'positivepflege-pro'),
+        'section'   => 'positivepflege_contact_cta',
+        'mime_type' => 'image',
+        'description' => __('Dieses Bild erscheint auf der rechten Seite neben dem Text.', 'positivepflege-pro'),
+    ]));
 
     // Design
     $wp_customize->add_section('positivepflege_design', [
@@ -444,32 +432,30 @@ function positivepflege_pro_css_variables() {
     $secondary = get_theme_mod('secondary_color', '#0f172a');
     $cta_bg = get_theme_mod('header_cta_bg_color', '#2c7a7b');
     $cta_text = get_theme_mod('header_cta_text_color', '#ffffff');
-    ?>
-    <style id="positivepflege-custom-css">
-        :root {
-            --pp-accent: <?php echo esc_attr($accent); ?>;
-            --pp-secondary: <?php echo esc_attr($secondary); ?>;
-            --pp-header-cta-bg: <?php echo esc_attr($cta_bg); ?>;
-            --pp-header-cta-text: <?php echo esc_attr($cta_text); ?>;
-        }
-        .header-cta-button {
-            background-color: var(--pp-header-cta-bg) !important;
-            color: var(--pp-header-cta-text) !important;
-            border-color: var(--pp-header-cta-bg) !important;
-        }
-    </style>
-    <?php
+    
+    echo '<style id="positivepflege-custom-css">';
+    echo 'html:root{';
+    echo '--pp-accent:' . esc_attr($accent) . ';';
+    echo '--pp-secondary:' . esc_attr($secondary) . ';';
+    echo '--pp-header-cta-bg:' . esc_attr($cta_bg) . ';';
+    echo '--pp-header-cta-text:' . esc_attr($cta_text) . ';';
+    echo '}';
+    echo '.header-cta-button{';
+    echo 'background-color: var(--pp-header-cta-bg) !important;';
+    echo 'color: var(--pp-header-cta-text) !important;';
+    echo 'border-color: var(--pp-header-cta-bg) !important;';
+    echo '}';
+    echo '</style>';
 }
 add_action('wp_head', 'positivepflege_pro_css_variables', 100);
 
 function positivepflege_pro_default_menu_fallback() {
-    $output = '<ul class="menu-fallback">';
-    $output .= '<li><a href="' . esc_url(home_url('/')) . '">Start</a></li>';
-    $output .= '<li><a href="' . esc_url(home_url('/leistungen')) . '">Leistungen</a></li>';
-    $output .= '<li><a href="' . esc_url(home_url('/ueber-uns')) . '">Über uns</a></li>';
-    $output .= '<li><a href="' . esc_url(home_url('/kontakt')) . '">Kontakt</a></li>';
-    $output .= '</ul>';
-    return $output;
+    echo '<ul class="menu-fallback">';
+    echo '<li><a href="' . esc_url(home_url('/')) . '">Start</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/leistungen')) . '">Leistungen</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/ueber-uns')) . '">Über uns</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/kontakt')) . '">Kontakt</a></li>';
+    echo '</ul>';
 }
 
 function positive_pflege_schema() {
