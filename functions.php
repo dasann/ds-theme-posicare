@@ -26,9 +26,9 @@ add_action('after_setup_theme', 'positivepflege_pro_setup');
 
 function positivepflege_pro_assets() {
     wp_enqueue_style('dashicons');
-    wp_enqueue_style('positivepflege-pro-style', get_stylesheet_uri(), [], '1.0.0');
-    wp_enqueue_style('positivepflege-pro-main', get_template_directory_uri() . '/assets/css/main.css', ['positivepflege-pro-style'], '1.0.0');
-    wp_enqueue_script('positivepflege-pro-main', get_template_directory_uri() . '/assets/js/main.js', [], '1.0.0', true);
+    wp_enqueue_style('positivepflege-pro-style', get_stylesheet_uri(), [], filemtime(get_stylesheet_directory() . '/style.css'));
+    wp_enqueue_style('positivepflege-pro-main', get_template_directory_uri() . '/assets/css/main.css', ['positivepflege-pro-style'], filemtime(get_template_directory() . '/assets/css/main.css'));
+    wp_enqueue_script('positivepflege-pro-main', get_template_directory_uri() . '/assets/js/main.js', [], filemtime(get_template_directory() . '/assets/js/main.js'), true);
 }
 add_action('wp_enqueue_scripts', 'positivepflege_pro_assets');
 
