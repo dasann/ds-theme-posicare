@@ -48,3 +48,7 @@ Text Domain: positivepflege-pro
 .pp-delay-2 { animation-delay: 0.2s; }
 .pp-delay-3 { animation-delay: 0.3s; }
 
+.pp-round-border {
+    border-radius: 28px;
+    border: 1px solid rgb(42 122 100);
+}
